@@ -18,10 +18,11 @@ import net.wiringbits.core.I18nHooks
 import net.wiringbits.webapp.utils.slinkyUtils.components.core.widgets.{Container, Subtitle}
 import org.scalablytyped.runtime.StringDictionary
 import slinky.core.FunctionalComponent
+import slinky.core.annotations.react
 import slinky.core.facade.Fragment
 
-object LogList {
-  case class Props(ctx: AppContext, response: GetUserLogs.Response, forceRefresh: () => Unit)
+@react object LogList {
+  case class Props(ctx: AppContext, response: GetUserLogs.Response, refresh: () => Unit)
 
   private lazy val useStyles: StylesHook[Styles[Theme, Unit, String]] = {
     val stylesCallback: StyleRulesCallback[Theme, Unit, String] = theme =>
@@ -60,7 +61,7 @@ object LogList {
             mui
               .Button(texts.reload)
               .color(Color.primary)
-              .onClick(_ => props.forceRefresh())
+              .onClick(_ => props.refresh())
           )
         ),
         mui
